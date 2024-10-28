@@ -34,5 +34,5 @@ jobs:
       - name: Publish NuGet package
         run: |
           foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-              dotnet nuget push $file -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/Demcon-DSS/index.json --skip-duplicate --no-symbols 
+              dotnet nuget push $file -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/Demcon/index.json --skip-duplicate --no-symbols 
           }
