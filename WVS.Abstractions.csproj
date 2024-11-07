@@ -8,10 +8,11 @@
 		<GitVersion>false</GitVersion>
 		<UnityVersion>6000.0.23f1</UnityVersion>
 		<UnityModulesPath Condition="'$(UnityModulesPath)'==''">$(MSBuildThisFileDirectory)\UnityEngine\$(UnityVersion)</UnityModulesPath>
+		<Version>$(Version)</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="GitInfo" Version="3.3.5" PrivateAssets="all"/>
+		<PackageReference Include="GitInfo" Version="3.3.5" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
 	</ItemGroup>
 
@@ -27,7 +28,6 @@
 
 	<ItemGroup>
 		<Reference Include="$(UnityModulesPath)\UnityEngine.dll" Private="false" />
-
 		<Content Include="$(UnityModulesPath)\UnityEngine.dll">
 			<Pack>true</Pack>
 			<PackagePath>lib\$(TargetFramework)</PackagePath>
