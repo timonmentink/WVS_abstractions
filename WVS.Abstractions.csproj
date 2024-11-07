@@ -7,13 +7,24 @@
 		<LangVersion>9</LangVersion>
 		<UnityVersion>6000.0.23f1</UnityVersion>
 		<UnityModulesPath Condition="'$(UnityModulesPath)'==''">$(MSBuildThisFileDirectory)\UnityEngine\$(UnityVersion)</UnityModulesPath>
-		<VersionPrefix>$(Version)</VersionPrefix>
+		<GitVersion>false</GitVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="GitInfo" Version="3.3.5" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
 	</ItemGroup>
+
+	<Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion;GenerateNuspec;GetPackageContents">
+		<PropertyGroup>
+			<Version>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)$(GitSemVerDashLabel)+$(GitBranch).$(GitCommit)</Version>
+			<PackageVersion>$(Version)</PackageVersion>
+			<VersionPrefix>$(Version)</VersionPrefix>
+			<RepositoryBranch>$(GitBranch)</RepositoryBranch>
+			<RepositoryCommit>$(GitCommit)</RepositoryCommit>
+			<SourceRevisionId>$(GitBranch) $(GitCommit)</SourceRevisionId>
+		</PropertyGroup>
+	</Target>
 
 	<ItemGroup>
 		<Reference Include="$(UnityModulesPath)\UnityEngine.dll" Private="false" />
